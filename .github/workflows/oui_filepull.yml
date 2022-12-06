@@ -1,9 +1,12 @@
 ---
 name: "Flat"
 
-on:  # yamllint disable-line rule:truthy
+on: # yamllint disable-line rule:truthy
   schedule:
     - cron: "30 14 7 * *"
+  push:
+    branches:
+      - "update_oui_ci_move_helper_files"
 
 env:
   oui_branch_name: "flatbot_oui_update"
