@@ -41,11 +41,3 @@ jobs:
         run: gh pr create -B develop -H flatbot_oui_update --title 'Flatbot OUI File Updates' --body 'Created by Flatbot action'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      # # Create a PR into develop
-      # - name: "Create Pull Request"
-      #   uses: peter-evans/create-pull-request@v4
-      #   with:
-      #     title: "OUI File Updates"
-      #     body: "Automated changes by the Github Action Flatbot"
-      #     base: "develop"
-      #     branch: "flatbot_oui_update"
