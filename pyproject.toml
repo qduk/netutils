@@ -71,6 +71,7 @@ exclude = '''
   )/
   | settings.py     # This is where you define files that should not be stylized by black
                      # the root of the project
+  | netutils/data_files     # Black is ran upon creation of these directory files
 )
 '''
 

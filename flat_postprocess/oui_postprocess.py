@@ -1,5 +1,6 @@
 """Python code used to postprocess Flat github action data related to OUI mappings."""
 import sys
+import os
 import re
 from urllib.request import urlopen
 
@@ -8,9 +9,10 @@ OUI_MAPPINGS = {}
 
 if __name__ == "__main__":
     if len(sys.argv) == 3:
-        with urlopen("https://standards-oui.ieee.org").read().decode("utf-8") as oui_textfile:  # nosec B310
-            with open(sys.argv[1], "w", encoding="utf-8") as oui_mappings:
-                oui_mappings.write(oui_textfile)
+        URL = "https://standards-oui.ieee.org"
+        oui_textfile = urlopen(URL).read().decode("utf-8")  # nosec: pylint: disable=consider-using-with
+        with open(sys.argv[1], "w", encoding="utf-8") as oui_mappings:
+            oui_mappings.write(oui_textfile)
 
     with open(sys.argv[1], "r", encoding="utf-8") as oui_file:
         for line in oui_file:
@@ -27,3 +29,5 @@ if __name__ == "__main__":
         for mac, company in OUI_MAPPINGS.items():
             oui_mappings.write(f'    "{mac}": "{company}",\n')
         oui_mappings.write("}\n")
+
+    os.system(f"black {sys.argv[1]}")
