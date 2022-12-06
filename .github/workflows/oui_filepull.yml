@@ -18,7 +18,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          branch: $oui_branch_name
+          branch: "{{ $oui_branch_name }}"
       # This step installs Deno, which is a new Javascript runtime that improves on Node. Can be used for an optional postprocessing step
       - name: "Setup deno"
         uses: "denoland/setup-deno@main"
@@ -28,7 +28,7 @@ jobs:
       - name: "Check out repo"
         uses: "actions/checkout@v2"
         with:
-          ref: $oui_branch_name
+          ref: "{{ $oui_branch_name }}"
       # The Flat Action step. We fetch the data in the http_url and save it as downloaded_filename
       - name: "Fetch data"
         uses: "githubocto/flat@v3"
@@ -43,4 +43,4 @@ jobs:
           title: "OUI File Updates"
           body: "Automated changes by the Github Action Flatbot"
           base: "develop"
-          branch: $oui_branch_name
+          branch: "{{ $oui_branch_name }}"
