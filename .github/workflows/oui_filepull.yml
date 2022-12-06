@@ -38,7 +38,7 @@ jobs:
           downloaded_filename: "./netutils/oui_mappings.py"
           postprocess: "./flat_postprocess/oui_postprocess.ts"
       - name: "Create a Pull Request"
-        run: gh pr create -B develop -H flatbot_oui_update --fill
+        run: gh pr create -B develop -H flatbot_oui_update --title 'Flatbot OUI File Updates' --body 'Created by Flatbot action'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       # # Create a PR into develop
