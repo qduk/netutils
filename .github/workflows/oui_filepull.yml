@@ -6,11 +6,12 @@ on: # yamllint disable-line rule:truthy
     branches:
       - "update_flat_workflow"
 
+env:
+  oui_branch_name: "flatbot_oui_update"
+
 jobs:
   scheduled:
     runs-on: "ubuntu-latest"
-    env:
-      oui_branch_name: "flatbot_oui_update"
     steps:
       # This step creates a branch for the flatbot to propose any changes to the oui file
       - name: "Create branch for flatbot"
@@ -18,7 +19,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          branch: $oui_branch_name
+          branch: "flatbot_oui_update"
       # This step installs Deno, which is a new Javascript runtime that improves on Node. Can be used for an optional postprocessing step
       - name: "Setup deno"
         uses: "denoland/setup-deno@main"
@@ -28,7 +29,7 @@ jobs:
       - name: "Check out repo"
         uses: "actions/checkout@v2"
         with:
-          ref: $oui_branch_name
+          ref: "flatbot_oui_update"
       # The Flat Action step. We fetch the data in the http_url and save it as downloaded_filename
       - name: "Fetch data"
         uses: "githubocto/flat@v3"
@@ -43,4 +44,4 @@ jobs:
           title: "OUI File Updates"
           body: "Automated changes by the Github Action Flatbot"
           base: "develop"
-          branch: $oui_branch_name
+          branch: "flatbot_oui_update"
