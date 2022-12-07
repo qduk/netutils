@@ -6,12 +6,11 @@ on: # yamllint disable-line rule:truthy
     branches:
       - "test_ci_flat"
 
-env:
-  BRANCH_NAME: "flatbot_oui_update"
-
 jobs:
   scheduled:
     runs-on: "ubuntu-latest"
+    env:
+      BRANCH_NAME: "flatbot_oui_update"
     steps:
       # This step creates a branch for the flatbot to propose any changes to the oui file
       - name: "Create branch for flatbot"
@@ -35,7 +34,7 @@ jobs:
         uses: "githubocto/flat@v3"
         with:
           http_url: "https://standards-oui.ieee.org"
-          downloaded_filename: "./netutils/oui_mappings.py"
+          downloaded_filename: "./netutils/data_files/oui_mappings.py"
           postprocess: "./flat_postprocess/oui_postprocess.ts"
       # - name: "Create a Pull Request"
       #   run: gh pr create -B develop -H flatbot_oui_update --title 'Flatbot OUI File Updates' --body 'Created by Flatbot action'
