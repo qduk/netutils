@@ -10,7 +10,7 @@ jobs:
   scheduled:
     runs-on: "ubuntu-latest"
     env:
-      BRANCH_NAME: "flatbot_oui_update"
+      BRANCH_NAME: "flatbot_oui_update2"
     steps:
       # This step creates a branch for the flatbot to propose any changes to the oui file
       - name: "Create branch for flatbot"
@@ -19,16 +19,16 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           branch: ${{ env.BRANCH_NAME }}
-      # This step installs Deno, which is a new Javascript runtime that improves on Node. Can be used for an optional postprocessing step
-      - name: "Setup deno"
-        uses: "denoland/setup-deno@main"
-        with:
-          deno-version: "v1.10.x"
       # Check out the repository so it can read the files inside of it and do other operations
       - name: "Check out repo"
         uses: "actions/checkout@v2"
         with:
           ref: ${{ env.BRANCH_NAME }}
+      # This step installs Deno, which is a new Javascript runtime that improves on Node. Can be used for an optional postprocessing step
+      - name: "Setup deno"
+        uses: "denoland/setup-deno@main"
+        with:
+          deno-version: "v1.10.x"
       # The Flat Action step. We fetch the data in the http_url and save it as downloaded_filename
       - name: "Fetch data"
         uses: "githubocto/flat@v3"
