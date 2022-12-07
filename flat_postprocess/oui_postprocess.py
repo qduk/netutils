@@ -13,6 +13,7 @@ if __name__ == "__main__":
                 oui_mappings.write(oui_textfile)
 
     with open(sys.argv[1], "r", encoding="utf-8") as oui_file:
+        print(sys.argv)
         for line in oui_file:
             if re.search(HEX_RE, line):
                 group_regex_values = re.search(HEX_RE, line).groupdict()
