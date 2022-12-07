@@ -35,9 +35,9 @@ jobs:
         uses: "githubocto/flat@v3"
         with:
           http_url: "https://standards-oui.ieee.org"
-          downloaded_filename: "./netutils/oui_mappings.py"
+          downloaded_filename: "oui_mappings.py"
           postprocess: "./flat_postprocess/oui_postprocess.ts"
-      - name: "Create a Pull Request"
-        run: gh pr create -B develop -H flatbot_oui_update --title 'Flatbot OUI File Updates' --body 'Created by Flatbot action'
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # - name: "Create a Pull Request"
+      #   run: gh pr create -B develop -H flatbot_oui_update --title 'Flatbot OUI File Updates' --body 'Created by Flatbot action'
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
