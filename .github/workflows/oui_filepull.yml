@@ -18,7 +18,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          branch: "$BRANCH_NAME"
+          branch: ${{ BRANCH_NAME }}
       # This step installs Deno, which is a new Javascript runtime that improves on Node. Can be used for an optional postprocessing step
       - name: "Setup deno"
         uses: "denoland/setup-deno@main"
@@ -28,7 +28,7 @@ jobs:
       - name: "Check out repo"
         uses: "actions/checkout@v2"
         with:
-          ref: "$BRANCH_NAME"
+          ref: ${{ BRANCH_NAME }}
       # The Flat Action step. We fetch the data in the http_url and save it as downloaded_filename
       - name: "Fetch data"
         uses: "githubocto/flat@v3"
