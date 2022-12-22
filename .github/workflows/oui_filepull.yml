@@ -37,6 +37,9 @@ jobs:
           http_url: "https://standards-oui.ieee.org"
           downloaded_filename: "./netutils/data_files/oui_mappings.py"
           postprocess: "./flat_postprocess/oui_postprocess.ts"
+      # Sleep for 15 seconds to allow for postprocessing of file in above step
+      - name: "Sleep for 15 seconds"
+        run: "sleep 15s"
       # Create PR from branch created above into develop
       - name: "Create a Pull Request"
         run: "gh pr create -B test_ci_flat -H $BRANCH_NAME --title 'Flatbot OUI File Updates' --body 'Created by Flatbot action'"
