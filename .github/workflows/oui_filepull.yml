@@ -22,7 +22,7 @@ jobs:
         run: git checkout -b $BRANCH_NAME
       # Push new branch so Flatbot can make its commit
       - name: "Push Flatbot branch"
-        run: git cpush origin $BRANCH_NAME
+        run: git push origin $BRANCH_NAME
       # This step installs Deno, which is a new Javascript runtime that improves on Node. Can be used for an optional postprocessing step
       - name: "Setup deno"
         uses: "denoland/setup-deno@main"
