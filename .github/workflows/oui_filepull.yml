@@ -18,7 +18,7 @@ jobs:
       - name: "Check out code"
         uses: "actions/checkout@v2"
         with:
-          ref: develop
+          ref: test_ci_flat
       # Create branch for Flatbot
       - name: "Create Flatbot branch"
         run: git checkout -b $BRANCH_NAME
@@ -39,6 +39,6 @@ jobs:
           postprocess: "./flat_postprocess/oui_postprocess.ts"
       # Create PR from branch created above into develop
       - name: "Create a Pull Request"
-        run: "gh pr create -B develop -H $BRANCH_NAME --title 'Flatbot OUI File Updates' --body 'Created by Flatbot action'"
+        run: "gh pr create -B test_ci_flat -H $BRANCH_NAME --title 'Flatbot OUI File Updates' --body 'Created by Flatbot action'"
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
