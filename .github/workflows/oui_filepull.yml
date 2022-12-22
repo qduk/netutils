@@ -12,14 +12,17 @@ jobs:
   scheduled:
     runs-on: "ubuntu-latest"
     env:
-      BRANCH_NAME: "flatbot_oui_update"
+      BRANCH_NAME: "OUI_Updates"
     steps:
       # Checkout repo
       - name: "Check out code"
         uses: "actions/checkout@v2"
       # Create branch for Flatbot
-      - name: "Create flatbot branch"
-        run: git checkout -b OUI_Updates
+      - name: "Create Flatbot branch"
+        run: git checkout -b $BRANCH_NAME
+      # Push new branch so Flatbot can make its commit
+      - name: "Push Flatbot branch"
+        run: git cpush origin $BRANCH_NAME
       # This step installs Deno, which is a new Javascript runtime that improves on Node. Can be used for an optional postprocessing step
       - name: "Setup deno"
         uses: "denoland/setup-deno@main"
