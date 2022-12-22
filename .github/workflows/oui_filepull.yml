@@ -9,7 +9,7 @@ on: # yamllint disable-line rule:truthy
       - "myci_tests"
 
 jobs:
-  scheduled:
+  data_update:
     runs-on: "ubuntu-latest"
     env:
       BRANCH_NAME: "OUI_Updates"
@@ -37,11 +37,16 @@ jobs:
           http_url: "https://standards-oui.ieee.org"
           downloaded_filename: "./netutils/data_files/oui_mappings.py"
           postprocess: "./flat_postprocess/oui_postprocess.ts"
-      # Sleep for 15 seconds to allow for postprocessing of file in above step
-      - name: "Sleep for 15 seconds"
-        run: "sleep 15s"
+  pr_creation:
+    runs-on: "ubuntu-latest"
+    steps:
+      # Checkout repo
+      - name: "Check out code"
+        uses: "actions/checkout@v2"
+        with:
+          ref: OUI_Updates
       # Create PR from branch created above into develop
       - name: "Create a Pull Request"
-        run: "gh pr create -B test_ci_flat -H $BRANCH_NAME --title 'Flatbot OUI File Updates' --body 'Created by Flatbot action'"
+        run: "gh pr create -B test_ci_flat -H OUI_Updates --title 'Flatbot OUI File Updates' --body 'Created by Flatbot action'"
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
